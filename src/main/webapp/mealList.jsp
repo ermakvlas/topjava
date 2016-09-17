@@ -17,9 +17,6 @@
             padding: 8px;
         }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
     </style>
 </head>
 <body>
@@ -27,8 +24,16 @@
 <h2>Meal list</h2>
 <table>
     <c:forEach var="meal" items="${mealsWithExceed}">
-        <tr>
-            <c:set var="cleanedDateTime" value="${fn:replace(meal.dateTime, 'T', ' ')}" />
+        <c:choose>
+            <c:when test="${meal.exceed}">
+                <c:set var="color" value="#DD615B"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="color" value="#5EDD69"/>
+            </c:otherwise>
+        </c:choose>
+        <tr bgcolor="${color}">
+            <c:set var="cleanedDateTime" value="${fn:replace(meal.dateTime, 'T', ' ')}"/>
             <td><c:out value="${cleanedDateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>

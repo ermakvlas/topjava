@@ -23,9 +23,11 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = getLogger(MealServlet.class);
 
-    protected static List<MealWithExceed> mealsWithExceed;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LOG.debug("redirect to mealList");
 
-    static {
+        List<MealWithExceed> mealsWithExceed;
+
         List<Meal> meals = Arrays.asList(
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
@@ -34,11 +36,9 @@ public class MealServlet extends HttpServlet {
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
-        mealsWithExceed = MealsUtil.getAllWithExceeded(meals,2000);
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.debug("redirect to mealList");
+        mealsWithExceed = MealsUtil.getAllWithExceeded(meals, 2000);
+
 
         request.setAttribute("mealsWithExceed", mealsWithExceed);
 
