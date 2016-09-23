@@ -11,17 +11,19 @@ import java.time.LocalTime;
 public class Meal {
     private Integer id;
 
+    private Integer owner;
+
     private final LocalDateTime dateTime;
 
     private final String description;
 
     private final int calories;
 
-    public Meal(LocalDateTime dateTime, String description, int calories) {
-        this(null, dateTime, description, calories);
+    public Meal(Integer owner, LocalDateTime dateTime, String description, int calories) {
+        this(owner, null, dateTime, description, calories);
     }
 
-    public Meal(Integer id, LocalDateTime dateTime, String description, int calories) {
+    public Meal(Integer owner, Integer id, LocalDateTime dateTime, String description, int calories) {
         this.id = id;
         this.dateTime = dateTime;
         this.description = description;
@@ -58,6 +60,14 @@ public class Meal {
 
     public boolean isNew() {
         return id == null;
+    }
+
+    public Integer getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Integer owner) {
+        this.owner = owner;
     }
 
     @Override
