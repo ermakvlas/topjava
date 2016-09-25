@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.model.MealWithExceed;
 import ru.javawebinar.topjava.service.MealServiceImpl;
+import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.MealServlet;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * GKislin
@@ -32,9 +34,9 @@ public class MealRestController {
         service.delete(id, AuthorizedUser.id());
     }
 
-    public Collection<Meal> getAll(){
+    public List<MealWithExceed> getAll(){
         LOG.info("getAll meals for user id: " + AuthorizedUser.id());
-        return service.getAll(AuthorizedUser.id());
+        return MealsUtil.getWithExceeded(service.getAll(AuthorizedUser.id()),MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
 
     public void update(Meal meal){
