@@ -11,7 +11,7 @@ import java.time.LocalTime;
 public class Meal {
     private Integer id;
 
-    private Integer owner;
+    private int owner;
 
     private final LocalDateTime dateTime;
 
@@ -23,7 +23,7 @@ public class Meal {
         this(owner, null, dateTime, description, calories);
     }
 
-    public Meal(Integer owner, Integer id, LocalDateTime dateTime, String description, int calories) {
+    public Meal(int owner, Integer id, LocalDateTime dateTime, String description, int calories) {
         this.id = id;
         this.dateTime = dateTime;
         this.description = description;
@@ -62,11 +62,11 @@ public class Meal {
         return id == null;
     }
 
-    public Integer getOwner() {
+    public int getOwner() {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
     }
 

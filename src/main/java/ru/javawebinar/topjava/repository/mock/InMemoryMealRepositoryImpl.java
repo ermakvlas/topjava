@@ -7,7 +7,6 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -66,9 +65,9 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Collection<Meal> getAll(int owner) {
+    public List<Meal> getAll(int owner) {
         List<Meal> res = repository.values().stream()
-//                .filter(meal -> meal.getOwner().equals(owner))
+                .filter(meal -> meal.getOwner()==owner)
                 .sorted((m1,m2)->m2.getDateTime().compareTo(m1.getDateTime()))
                 .collect(Collectors.toList());
         return res.size()==0 ? Collections.EMPTY_LIST:res;
