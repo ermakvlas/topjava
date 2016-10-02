@@ -23,7 +23,7 @@ import static ru.javawebinar.topjava.UserTestData.*;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserServiceTest {
+public class  UserServiceTest {
 
     @Autowired
     protected UserService service;
