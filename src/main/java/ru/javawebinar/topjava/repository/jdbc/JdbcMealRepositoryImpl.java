@@ -49,29 +49,29 @@ public class JdbcMealRepositoryImpl implements MealRepository {
             Number newKey = insertMeal.executeAndReturnKey(map);
             Meal.setId(newKey.intValue());
         } else {
-            namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:date_time, description=:description, calories=:calories, user_id=:id WHERE id=:id", map);
+            namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:date_time, description=:description, calories=:calories WHERE id=:id", map);
         }
         return Meal;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM meals WHERE id=?", id) != 0;
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
     public Meal get(int id, int userId)
     {
-        return jdbcTemplate.queryForObject("SELECT id, date_time, description, calories, user_id FROM meals WHERE id=?", ROW_MAPPER, id);
+        return jdbcTemplate.queryForObject("SELECT id, date_time, description, calories, user_id FROM meals WHERE id=? AND user_id=?", ROW_MAPPER, id, userId);
     }
 
     @Override
     public List<Meal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals ORDER BY date_time", ROW_MAPPER);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY date_time", ROW_MAPPER, userId);
     }
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE date_time>=? AND date_time<=? ORDER BY date_time", ROW_MAPPER, startDate, endDate);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE date_time>=? AND date_time<=? AND meals.user_id=? ORDER BY date_time", ROW_MAPPER, startDate, endDate, userId);
     }
 }
