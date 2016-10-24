@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by nassuka on 24.10.2016.
  */
-public class AbstractMealsController {
+public class AbstractMealController {
     protected static final Logger LOG = LoggerFactory.getLogger(MealRestController.class);
 
     @Autowired
