@@ -24,13 +24,13 @@ public class JpaMealController extends AbstractMealController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
-        return "redirect:meals";
+        return "redirect:/meals";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String update(HttpServletRequest request, Model model) {
         model.addAttribute("meal", super.get(getId(request)));
-        return "meal";
+        return "redirect:/meals";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
