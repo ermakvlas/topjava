@@ -63,6 +63,7 @@ public class User extends NamedEntity {
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("dateTime DESC")
+//    @JsonIgnore
     protected List<Meal> meals;
 
     public User() {
