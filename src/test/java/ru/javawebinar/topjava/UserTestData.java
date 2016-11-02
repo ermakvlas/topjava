@@ -1,9 +1,13 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.matcher.ModelMatcher;
+import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Objects;
 
 import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
@@ -17,6 +21,7 @@ public class UserTestData {
     public static final int ADMIN_ID = START_SEQ + 1;
 
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
+    public static final Meal MEAL = new Meal(100007,LocalDateTime.of(2015, Month.MAY, 31, 20, 0 ), "Ужин", 510);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN, Role.ROLE_USER);
 
     public static final ModelMatcher<User> MATCHER = new ModelMatcher<>(User.class,
